@@ -2529,6 +2529,33 @@ searchInput.addEventListener('input', function() {
 // 	return x.toString().split('').reverse().join('') === x.toString();
 // };
 // console.log(isPalindrome(121));
+
+// var isPalindrome = function (x) {
+// 	let start = 0;
+// 	let end = x.length - 1;
+
+// 	while (start < end) {
+// 		let firstChar = x[start].toLowerCase();
+// 		let lastChar = x[end].toLowerCase();
+
+// 		if (firstChar.toLowerCase() === firstChar.toUpperCase()) {
+// 			start++;
+// 			continue;
+// 		}
+// 		if (lastChar.toLowerCase() === lastChar.toUpperCase()) {
+// 			end--;
+// 			continue;
+// 		}
+// 		if (firstChar !== lastChar) {
+// 			return false;
+// 		}
+// 		start++;
+// 		end--;
+// 	}
+// 	return true;
+// };
+// console.log(isPalindrome(`No 'x' in Nixon`));
+
 // ------------------------------------------------------
 
 // var romanToInt = function (s) {
@@ -2573,5 +2600,213 @@ searchInput.addEventListener('input', function() {
 // Input: strs = ['flower', 'flow', 'flight'];Output: 'fl';
 
 // -------------------------------------------------
-var isValid = function (s) {};
-console.log(isValid('([])'));
+// var longestCommonPrefix = function (strs) {
+// 	const sortStr = strs.sort();
+// 	let first = sortStr[0];
+// 	let last = sortStr[sortStr.length - 1];
+// 	let i = 0;
+
+// 	while (i < first.length && i < last.length && first[i] === last[i]) {
+// 		i++;
+// 	}
+
+// 	return first.substring(0, i);
+// };
+// console.log(longestCommonPrefix(['flower', 'flow', 'flight']));
+
+// -------------------------------------
+// var isValid = function (s) {
+// 	const symbol = new Map([
+// 		['(', ')'],
+// 		['[', ']'],
+// 		['{', '}'],
+// 	]);
+
+// 	const stack = []; // ( , [
+// 	for (let char of s) {
+// 		if (symbol.has(char)) {
+// 			stack.push(char);
+// 		} else {
+// 			if (stack.length === 0 || symbol.get(stack.pop()) !== char) {
+// 				// [ - symbol.get(stack.pop()) , char - ]
+// 				return false;
+// 			}
+// 		}
+// 	}
+// 	return stack.length === 0;
+// };
+// console.log(isValid('([])'));
+
+// --------------------------------------------------
+// function reverseWords(arr) {
+// 	let length = arr.map(sent => sent.split(' ').length);
+// 	console.log(length);
+
+// 	return Math.max(...length);
+// }
+// console.log(reverseWords(['sdf dflnnlk', 'lssl ldld laalldld', 'df dkcmk dkckdmckmd dcmkdmck']));
+
+//--------------------------------------
+// var isAnagram = function (s, t) {
+// 	if (s.length < t.length) {
+// 		return false;
+// 	}
+// 	const sMap = {};
+// 	const tMap = {};
+
+// 	for (let i = 0; i < s.length; i++) {
+// 		sMap[s[i]] = (sMap[s[i]] || 0) + 1;
+// 		tMap[t[i]] = (tMap[t[i]] || 0) + 1;
+// 	}
+
+// 	for (let key in sMap) {
+// 		if (sMap[key] !== tMap[key]) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+// };
+// console.log(isAnagram('anagram', 'nagaram'));
+
+// 2(medium)
+// var groupAnagrams = function (strs) {
+// 	const anagramsMap = {};
+
+// 	for (const word of strs) {
+// 		let sortStr = word.split('').sort().join('');
+
+// 		if (anagramsMap[sortStr]) {
+// 			anagramsMap[sortStr].push(word);
+// 			// console.log(anagramsMap);
+// 		} else {
+// 			anagramsMap[sortStr] = [word];
+// 			// console.log(anagramsMap);
+// 		}
+// 	}
+
+// 	return Object.values(anagramsMap);
+// };
+// console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat'])); //Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+// --------------------------------------------
+// var search = function (nums, target) {
+// 	let low = 0;
+// 	let high = nums.length - 1;
+// 	while (low <= high) {
+// 		let mid = Math.floor((low + high) / 2);
+// 		let guess = nums[mid];
+// 		if (guess < target) {
+// 			low = mid + 1;
+// 		} else if (guess > target) {
+// 			high = mid - 1;
+// 		} else {
+// 			return mid;
+// 		}
+// 	}
+// 	return -1;
+// };
+// console.log(search([-1, 0, 3, 5, 9, 12], 9));
+
+// 2(middle)
+// var searchMatrix = function (matrix, target) {
+// 	const matrixArr = matrix.flat();
+// 	console.log(matrixArr);
+// 	let low = 0;
+// 	let high = matrixArr.length - 1;
+
+// 	while (low <= high) {
+// 		let mid = Math.floor((low + high) / 2);
+// 		let guess = matrixArr[mid];
+// 		if (guess < target) {
+// 			low = mid + 1;
+// 		} else if (guess > target) {
+// 			high = mid - 1;
+// 		} else {
+// 			return true;
+// 		}
+// 	}
+
+// 	return false;
+// };
+
+// console.log(
+// 	searchMatrix(
+// 		[
+// 			[1, 3, 5, 7],
+// 			[10, 11, 16, 20],
+// 			[23, 30, 34, 60],
+// 		],
+// 		3
+// 	)
+// );
+
+// ------------------- сортировка выбором ----------------------
+// function selectionSort(arr) {
+// 	for (let i = 0; i < arr.length - 1; i++) {
+// 		let minIdex = i;
+// 		for (let j = i + 1; j < arr.length; j++) {
+// 			if (arr[j] < arr[minIdex]) {
+// 				minIdex = j;
+// 			}
+// 		}
+// 		if (arr[minIdex] != i) {
+// 			[arr[i], arr[minIdex]] = [arr[minIdex], arr[i]];
+// 		}
+// 	}
+
+// 	return arr;
+// }
+// console.log(selectionSort([64, 25, 12, 22, 11]));
+
+// ----------------------- stack --------------------------------
+// var isValid = function (s) {
+// 	let stack = [];
+// 	const map = {
+// 		'(': ')',
+// 		'[': ']',
+// 		'{': '}',
+// 	};
+
+// 	for (let char in s) {
+// 		if (char in map) {
+// 			stack.push(char);
+// 		} else {
+// 			if (stack.length === 0 || map[stack.pop()] !== char) {
+// 				return false;
+// 			}
+// 		}
+// 	}
+// 	return stack.length === 0;
+// };
+// console.log(isValid('()[]{}'));
+// --------------------------- разделяй и властвуй ----------------------
+// function sum(arr) {
+// 	if (arr.length === 0) {
+// 		return 0;
+// 	} else {
+// 		return arr[0] + sum(arr.slice(1));
+// 	}
+// }
+
+// console.log(sum([2, 4, 6]));
+// ---- max num --------
+// function maxNum(arr) {
+// 	if (arr.length === 1) {
+// 		return arr[0];
+// 	} else {
+// 		return arr[0] > maxNum(arr.slice(1)) ? arr[0] : maxNum(arr.slice(1));
+// 	}
+// }
+// console.log(maxNum([2, 4, 6]));
+// -------- базовый и рекурсивный случаи для бинарного поиска  ------------
+function search(nums, target, left = 0, right = nums.length - 1) {
+	if (left > right) {
+		return false;
+	}
+	let mid = Math.floor((left + right) / 2);
+	if (nums[mid] === target) {
+		return true;
+	}
+	return nums[mid] > target ? search(nums, target, left, mid - 1) : search(nums, target, mid + 1, right);
+}
+console.log(search([-1, 0, 3, 5, 9, 12], 9));
